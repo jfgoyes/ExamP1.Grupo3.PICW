@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+h1{
+
+
+    
+=======
 body {
     font-family: Arial, Helvetica, sans-serif;
     padding: 20px;
@@ -37,4 +43,5 @@ li {
 #resumen_factura th {
     background-color: #4c86af;
     color: white;
+>>>>>>> 481a7ea372f0c3b3a2820b3a0b413c2edf4c7175
 }

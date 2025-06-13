@@ -1,10 +1,12 @@
+// Parte 1: Julio Paguay - Facturación
 
 /* Parte 1: Julio Cesar Paguay Bonilla */
 
 // Creamos una clase para gestionar facturas, productos y clientes desde el localStorage.
 class FacturaService {
     static obtenerFacturas() {
-        return JSON.parse(localStorage.getItem("facturas")) || [];
+        const datos = localStorage.getItem("facturas");
+        return datos ? JSON.parse(datos) : [];
     }
 
     static guardarFacturas(facturas) {
@@ -17,11 +19,13 @@ class FacturaService {
     }
 
     static obtenerProductos() {
-        return JSON.parse(localStorage.getItem("productos")) || [];
+        const datos = localStorage.getItem("productos");
+        return datos ? JSON.parse(datos) : [];
     }
 
     static obtenerClientes() {
-        return JSON.parse(localStorage.getItem("clientes")) || [];
+        const datos = localStorage.getItem("clientes");
+        return datos ? JSON.parse(datos) : [];
     }
 }
 
@@ -33,6 +37,7 @@ function agregarItemFactura() {
     const idProducto = document.getElementById("producto_factura").value;
     const cantidad = parseInt(document.getElementById("cantidad_producto").value);
 
+    // validación básica
     if (!idProducto || isNaN(cantidad) || cantidad <= 0) {
         alert("Selecciona un producto y una cantidad válida.");
         return;
@@ -48,7 +53,11 @@ function agregarItemFactura() {
 
     // Calculamos el subtotal del producto y lo añadimos a la factura.
     const subtotal = producto.precio * cantidad;
-    itemsFactura.push({ idProducto, cantidad, subtotal });
+    itemsFactura.push({
+        idProducto,
+        cantidad,
+        subtotal
+    });
 
     mostrarItemsFactura(); // Actualizamos la lista resultante en la pantalla.
     document.getElementById("cantidad_producto").value = ""; // Limpiamos el campo de la cantidad de los productos.
@@ -57,7 +66,7 @@ function agregarItemFactura() {
 // Mostramos los productos agregados y el valor total de la factura.
 function mostrarItemsFactura() {
     const lista = document.getElementById("lista_items_factura");
-    const totalElement = document.getElementById("total_factura");
+    const totalTexto = document.getElementById("total_factura");
     lista.innerHTML = "";
 
     let total = 0;
@@ -68,6 +77,7 @@ function mostrarItemsFactura() {
         const li = document.createElement("li");
         li.textContent = `${producto.nombre} x ${item.cantidad} = $${item.subtotal.toFixed(2)}`;
         lista.appendChild(li);
+
         total += item.subtotal;
     });
 

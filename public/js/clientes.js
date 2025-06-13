@@ -51,3 +51,11 @@ function agregarCliente() {
     // Se limpia los campos
     limpiarCamposCliente();
 }
+
+// Funcion para limpiar el formulario
+function limpiarCamposCliente() {
+    document.getElementById("nombre_cliente").value = "";
+    document.getElementById("cedula_cliente").value = "";
+    document.getElementById("direccion_cliente").value = "";
+}
+

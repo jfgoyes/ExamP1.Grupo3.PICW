@@ -106,3 +106,30 @@ function mostrarClientes() {
         select.appendChild(option); 
     }
 }
+
+// Función para cargar los datos del cliente en el formulario para editar
+function editarCliente(id) {
+    // Buscamos el cliente por su ID
+    let cliente = listaClientes.find(function (c) {
+        return c.id === id;
+    });
+
+    // Si no se encuentra salimos
+    if (!cliente) {
+        return;
+    }
+    
+    // Colocamos los datos del cliente en los campos del formulario
+    document.getElementById("nombre_cliente").value = cliente.nombre;
+    document.getElementById("cedula_cliente").value = cliente.cedula;
+    document.getElementById("direccion_cliente").value = cliente.direccion;
+
+    // Cambiamos el botón de agregar a editar
+    let boton = document.querySelector('button[onclick="agregarCliente()"]');
+    boton.innerText = "Actualizar Cliente";
+
+    // cambiamos la acción del boton
+    boton.onclick = function() {
+        actualizarCliente(cliente.id);
+    };
+}

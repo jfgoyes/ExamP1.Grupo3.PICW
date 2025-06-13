@@ -37,7 +37,7 @@ function agregarItemFactura() {
 
     // validación básica
     if (!idProducto || isNaN(cantidad) || cantidad <= 0) {
-        alert("Selecciona un producto y una cantidad válida.");
+        alert("Es obligatorio seleccionar un producto y una cantidad válida.");
         return;
     }
 

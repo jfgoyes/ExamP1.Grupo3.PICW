@@ -20,7 +20,7 @@ function agregarCliente() {
     const nombre = document.getElementById("nombre_cliente").value.trim();
     const cedula = document.getElementById("cedula_cliente").value.trim();
     const direccion = document.getElementById("direccion_cliente").value.trim();
-    // Especificamos una invalidación si existen datos para el cliente.
+    // Especificamos una invalidación si no existen datos para el cliente.
     if (!nombre || !cedula || !direccion) {
         alert("Se deben rellenar todos los datos del cliente.");
         return;
@@ -81,7 +81,7 @@ function mostrarClientes() {
 
         lista.appendChild(li);
 
-        // Establecemos una opción para el identificador del cliente.
+        // Establecemos una opción para seleccionar el identificador del cliente.
         const option = document.createElement("option");
         option.value = cliente.id;
         option.textContent = cliente.nombre;

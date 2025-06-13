@@ -19,3 +19,35 @@ function guardarClientes() {
     localStorage.setItem("clientes", JSON.stringify(listaClientes));
 }
 
+// Esta función se va a ejecutar cuando el usuario presione el botón "Agregar Cliente"
+function agregarCliente() {
+    // Con esto obtenemos los datos que el usuario escribió en los campos de texto
+    let nombre = document.getElementById("nombre_cliente").value;
+    let cedula = document.getElementById("cedula_cliente").value;
+    let direccion = document.getElementById("direccion_cliente").value;
+
+    // Se verifica que ningun campo este vacio
+    if (nombre === "" || cedula === "" || direccion === "") {
+        alert("Faltan datos del cliente");
+        return; // Salimos de la función si falta algo
+    }
+
+    let nuevoCliente = {
+        id: generarID(), // Generamos un ID único
+        nombre: nombre,
+        cedula: cedula,
+        direccion: direccion
+    };
+
+    // Se agrega el nuevo cliente a la lista
+    listaClientes.push(nuevoCliente);
+
+    // Guardamos la lista completa en localStorage
+    guardarClientes();
+
+    // Se muestra los clientes actualizados en pantalla
+    mostrarClientes();
+
+    // Se limpia los campos
+    limpiarCamposCliente();
+}

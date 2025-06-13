@@ -1,6 +1,6 @@
 /* Parte 1: William Adrian Herrera Juela */
 
-// Definimos una clase para los clientes.
+// Creamos una clase para gestionar los clientes desde el localStorage.
 class ClienteService {
     static obtenerClientes() {
         return JSON.parse(localStorage.getItem("clientes")) || [];

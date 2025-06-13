@@ -1,7 +1,7 @@
 
-/* Parte 1: Julio Paguay */
+/* Parte 1: Julio Cesar Paguay Bonilla */
 
-// Clase que gestiona facturas, productos y clientes desde el localStorage
+// Creamos una clase para gestionar facturas, productos y clientes desde el localStorage.
 class FacturaService {
     static obtenerFacturas() {
         return JSON.parse(localStorage.getItem("facturas")) || [];
@@ -11,7 +11,7 @@ class FacturaService {
         localStorage.setItem("facturas", JSON.stringify(facturas));
     }
 
-    // Crea un ID único basado en la fecha actual
+    // Creamos un ID único basado en la fecha actual.
     static generarID() {
         return Date.now().toString();
     }
@@ -25,10 +25,10 @@ class FacturaService {
     }
 }
 
-// Arreglo donde se guardan los productos agregados a la factura
+// Creamos un arreglo donde se van a guardar los productos agregados a la factura.
 let itemsFactura = [];
 
-// Agrega un producto con su cantidad a la factura
+// Agregamos un producto con su cantidad a la factura.
 function agregarItemFactura() {
     const idProducto = document.getElementById("producto_factura").value;
     const cantidad = parseInt(document.getElementById("cantidad_producto").value);
@@ -46,15 +46,15 @@ function agregarItemFactura() {
         return;
     }
 
-    // Calcula el subtotal del producto y lo añade a la factura
+    // Calculamos el subtotal del producto y lo añadimos a la factura.
     const subtotal = producto.precio * cantidad;
     itemsFactura.push({ idProducto, cantidad, subtotal });
 
-    mostrarItemsFactura(); // Actualiza la lista en pantalla
-    document.getElementById("cantidad_producto").value = ""; // Limpia el campo de cantidad
+    mostrarItemsFactura(); // Actualizamos la lista resultante en la pantalla.
+    document.getElementById("cantidad_producto").value = ""; // Limpiamos el campo de la cantidad de los productos.
 }
 
-// Muestra los productos agregados y el total de la factura
+// Mostramos los productos agregados y el valor total de la factura.
 function mostrarItemsFactura() {
     const lista = document.getElementById("lista_items_factura");
     const totalElement = document.getElementById("total_factura");
@@ -62,7 +62,7 @@ function mostrarItemsFactura() {
 
     let total = 0;
 
-    // Recorre los ítems para mostrarlos y calcular el total
+    // Recorremos los ítems para mostrarlos y hacer el cálculo del total.
     itemsFactura.forEach(item => {
         const producto = FacturaService.obtenerProductos().find(p => p.id === item.idProducto);
         const li = document.createElement("li");
@@ -71,12 +71,12 @@ function mostrarItemsFactura() {
         total += item.subtotal;
     });
 
-    // Muestra el total final de la factura
+    // Mostramos el total final de la factura.
     totalElement.textContent = `Total: $${total.toFixed(2)}`;
 }
 
+/* Parte 2: Job Francesco Goyes Arcalle */
 
-/* Parte 2: Job Goyes */
 // Creamos la función para guardar la información de la factura en base a los clientes y productos.
 function guardarFactura () {
     // Definimos el cliente respectivo para la factura.

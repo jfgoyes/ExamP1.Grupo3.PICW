@@ -90,7 +90,7 @@ function eliminarProducto(id) {
 }
 */
 
-// Creamos una clase para los productos.
+// Creamos una clase para gestionar los productos desde el localStorage.
 class ProductoService {
     static obtenerProductos() {
         return JSON.parse(localStorage.getItem("productos")) || [];

@@ -13,3 +13,9 @@ function generarID() {
     return Date.now().toString();
 }
 
+// Funcion para guardar la lista de clientes en localStorage
+function guardarClientes() {
+    // Aqui se convierte el array a texto con JSON.stringify
+    localStorage.setItem("clientes", JSON.stringify(listaClientes));
+}
+

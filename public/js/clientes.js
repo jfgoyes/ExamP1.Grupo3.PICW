@@ -59,3 +59,50 @@ function limpiarCamposCliente() {
     document.getElementById("direccion_cliente").value = "";
 }
 
+// Funcion para mostrar los clientes en pantalla
+function mostrarClientes() {
+    // obtenemos los elementos donde vamos a mostrar los clientes
+    let lista = document.getElementById("lista_clientes");
+    let select = document.getElementById("cliente_factura");
+    
+    // Limpiamos el contenido actual
+    lista.innerHTML = "";
+    select.innerHTML = "";
+
+    // Ahora recorremos cada cliente en la lista y lo mostramos
+    for (let i = 0; i < listaClientes.length; i++) {
+        let cliente = listaClientes[i];
+
+        // Creamos un elemento de lista
+        let item = document.createElement("li");
+        item.innerText = cliente.nombre + " (" + cliente.cedula + ") - " + cliente.direccion;
+        
+        // Agregamos un botón para editar el cliente
+       let btnEditar = document.createElement("button");
+        btnEditar.innerText = "Editar";
+        btnEditar.onclick = function() {
+            editarCliente(cliente.id);
+        };
+
+        // Boton para eliminar el cliente
+        let btnEliminar = document.createElement("button");
+        btnEliminar.innerText = "Eliminar";
+        btnElimminar.style.marginLeft = "5px"; // Espacio entre botones
+        btnEliminar.onclick = function() {
+            eliminarCliente(cliente.id);
+        };
+
+        // Agregamos los botones de la lista
+        item.appendChild(btnEditar);
+        item.appendChild(btnEliminar);
+
+        // Agregamos el item a la lista
+        lista.appendChild(item);
+
+        // Agregamos el cliente al select para facturas
+        let option = document.createElement("option");
+        option.value = cliente.id;
+        option.text = cliente.nombre;
+        select.appendChild(option); 
+    }
+}

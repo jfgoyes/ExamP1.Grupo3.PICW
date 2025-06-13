@@ -1,4 +1,4 @@
-/* Parte 1: William Adrian Herrera Juela */
+/* Parte 1: Willian Adrian Herrera Juela */
 
 // Creamos una clase para gestionar los clientes desde el localStorage.
 class ClienteService {

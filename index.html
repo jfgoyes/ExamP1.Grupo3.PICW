@@ -38,7 +38,7 @@
         <h2>REGISTRAR PRODUCTOS</h2>
         <input type="text" id="nombre_producto" placeholder="NOMBRE">
         <input type="number" id="precio_producto" placeholder="PRECIO">
-        <button onclick="agregarProducto()">Agregar Producto</button>
+        <button id="btn_producto" onclick="agregarProducto()">Agregar Producto</button>
         <ul id="lista_productos"></ul>
     </section>
     <!-- Seccion para generar factura -->
@@ -70,7 +70,7 @@
         </table>
         <p><strong>Total:</strong> $<span id="resumen_total"></span></p>
     </section>
-    <script src="/public/js/clientes.js"></script>
+    <script src="./public/js/clientes.js"></script>
     <script src="./public/js/productos.js"></script>
     <script src="./public/js/factura.js"></script>
 </body>

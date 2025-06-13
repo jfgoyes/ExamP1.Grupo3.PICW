@@ -1,5 +1,3 @@
-// Parte 1: Julio Paguay - Facturación
-
 /* Parte 1: Julio Cesar Paguay Bonilla */
 
 // Creamos una clase para gestionar facturas, productos y clientes desde el localStorage.

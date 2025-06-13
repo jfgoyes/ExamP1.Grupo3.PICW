@@ -7,3 +7,9 @@ if (localStorage.getItem("clientes")) {
     listaClientes = JSON.parse(localStorage.getItem("clientes"));
     mostrarClientes(); // Llamamos a la función para mostrar los clientes en pantalla
 }
+
+// Funcion para generar un ID automático usando la hora actual
+function generarID() {
+    return Date.now().toString();
+}
+

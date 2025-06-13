@@ -21,7 +21,7 @@ function agregarProducto() {
     const precio = parseFloat(document.getElementById("precio_producto").value);
     // Especificamos una invalidación si no existen datos para el producto.
     if (!nombre || isNaN(precio) || precio <= 0) {
-        alert("Nombre y precio válido son obligatorios.");
+        alert("Es obligatorio ingresar los datos del producto.");
         return;
     }
     // Definimos los datos de los productos.

@@ -1,3 +1,5 @@
+/* Parte 1: William Adrian Herrera Juela */
+
 // Esta lista guardará todos los clientes
 let listaClientes = [];
 
@@ -133,3 +135,45 @@ function editarCliente(id) {
         actualizarCliente(cliente.id);
     };
 }
+
+/* Parte 2: Steven German Caluña Rojas */
+
+// Creamos la función para actualizar los datos de los clientes que ya hayan sido ingresados.
+function actualizarCliente() {
+    const nombre = document.getElementById("nombre_cliente").vale.trim();
+    const cedula = document.getElementById("cedula_cliente").value.trim();
+    const direccion = document.getElementById("direccion_cliente").value.trim();
+    // Establecemos una condición para invalidar cualquier valor diferente de los datos establecidos.
+    if (!nombre || !cedula || !direccion) {
+        alert("Es obligatorio ingresar los datos del cliente.")
+        return;
+    }
+    // Buscamos el identificador de los clientes a actualizar.
+    const clientes = ClienteService.obtenerClientes();
+    const index = clientes.findIndex(c => c.id === id);
+    if(index === -1) return;
+    // Establecemos las variables de los datos a actualizar.
+    clientes[index] = { id, nombre, cedula, direccion };
+    ClienteService.guardarClientes(clientes);
+
+    mostrarClientes();
+    limpiarCamposCliente();
+
+    // Restauramos el boton para agregar nuevamente a los clientes.
+    const btnAgregar = document.querySelector('button[onclick]');
+    btnAgregar.textContent = "Añadir cliente";
+    btnAgregar.onclick = agregarCliente;
+}
+
+// Establecemos la función para eliminar algún cliente que haya sido registrado.
+function eliminarCliente(id) {
+    if (!confirm("¿Desea eliminar este cliente?")) return;
+        // Buscamos el identificador del cliente a eliminar.
+        let clientes = ClienteService.obtenerClientes();
+        clientes = clientes.filter(c => c.id !== id);
+        ClienteService.guardarClientes(clientes);
+
+        mostrarClientes();
+}
+
+document.addEventListener("DOMContentLoaded", mostrarClientes);

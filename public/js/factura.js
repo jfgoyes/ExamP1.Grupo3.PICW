@@ -1,38 +1,41 @@
+// Parte 1: Julio Paguay - Facturación
 
-/* Parte 1: Julio Paguay */
-
-// Clase que gestiona facturas, productos y clientes desde el localStorage
+// Clase para trabajar con facturas, productos y clientes desde localStorage
 class FacturaService {
     static obtenerFacturas() {
-        return JSON.parse(localStorage.getItem("facturas")) || [];
+        const datos = localStorage.getItem("facturas");
+        return datos ? JSON.parse(datos) : [];
     }
 
     static guardarFacturas(facturas) {
         localStorage.setItem("facturas", JSON.stringify(facturas));
     }
 
-    // Crea un ID único basado en la fecha actual
+    // genera un ID usando la fecha
     static generarID() {
         return Date.now().toString();
     }
 
     static obtenerProductos() {
-        return JSON.parse(localStorage.getItem("productos")) || [];
+        const datos = localStorage.getItem("productos");
+        return datos ? JSON.parse(datos) : [];
     }
 
     static obtenerClientes() {
-        return JSON.parse(localStorage.getItem("clientes")) || [];
+        const datos = localStorage.getItem("clientes");
+        return datos ? JSON.parse(datos) : [];
     }
 }
 
-// Arreglo donde se guardan los productos agregados a la factura
+// arreglo que guarda los productos agregados a la factura
 let itemsFactura = [];
 
-// Agrega un producto con su cantidad a la factura
+// función para agregar un producto a la factura con su cantidad
 function agregarItemFactura() {
     const idProducto = document.getElementById("producto_factura").value;
     const cantidad = parseInt(document.getElementById("cantidad_producto").value);
 
+    // validación básica
     if (!idProducto || isNaN(cantidad) || cantidad <= 0) {
         alert("Selecciona un producto y una cantidad válida.");
         return;
@@ -46,33 +49,36 @@ function agregarItemFactura() {
         return;
     }
 
-    // Calcula el subtotal del producto y lo añade a la factura
+    // se calcula el subtotal y se guarda en el arreglo
     const subtotal = producto.precio * cantidad;
-    itemsFactura.push({ idProducto, cantidad, subtotal });
+    itemsFactura.push({
+        idProducto,
+        cantidad,
+        subtotal
+    });
 
-    mostrarItemsFactura(); // Actualiza la lista en pantalla
-    document.getElementById("cantidad_producto").value = ""; // Limpia el campo de cantidad
+    mostrarItemsFactura();
+    document.getElementById("cantidad_producto").value = "";
 }
 
-// Muestra los productos agregados y el total de la factura
+// función que muestra los productos agregados y el total
 function mostrarItemsFactura() {
     const lista = document.getElementById("lista_items_factura");
-    const totalElement = document.getElementById("total_factura");
+    const totalTexto = document.getElementById("total_factura");
     lista.innerHTML = "";
 
     let total = 0;
 
-    // Recorre los ítems para mostrarlos y calcular el total
     itemsFactura.forEach(item => {
         const producto = FacturaService.obtenerProductos().find(p => p.id === item.idProducto);
         const li = document.createElement("li");
         li.textContent = `${producto.nombre} x ${item.cantidad} = $${item.subtotal.toFixed(2)}`;
         lista.appendChild(li);
+
         total += item.subtotal;
     });
 
-    // Muestra el total final de la factura
-    totalElement.textContent = `Total: $${total.toFixed(2)}`;
+    totalTexto.textContent = `Total: $${total.toFixed(2)}`;
 }
 
 

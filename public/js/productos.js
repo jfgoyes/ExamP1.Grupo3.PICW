@@ -175,3 +175,70 @@ function mostrarProductos() {
 }
 
 /* Parte 2: Veronica Janeth Yampuezan Burbano */
+
+// se cambia el contenido del formulario para editar el producto
+function editarProducto(id) {
+    const productos = ProductoService.obtenerProductos();
+    const producto = productos.find(p => p.id === id);
+    if (!producto) return;
+
+    // se llenan los campos con los datos actuales del producto
+    document.getElementById("nombre_producto").value = producto.nombre;
+    document.getElementById("precio_producto").value = producto.precio;
+
+    // se cambia el botón para que diga "Actualizar"
+    const btnAgregar = document.getElementById("btn_producto");
+    btnAgregar.textContent = "Actualizar Producto";
+
+    // se guarda la función de actualizar para cuando se dé clic
+    btnAgregar.onclick = () => actualizarProducto(id);
+}
+
+// se guardan los cambios después de editar un producto
+function actualizarProducto(id) {
+    const nombre = document.getElementById("nombre_producto").value.trim();
+    const precio = parseFloat(document.getElementById("precio_producto").value);
+
+    // se valida que los campos no estén vacíos o mal
+    if (!nombre || isNaN(precio) || precio <= 0) {
+        alert("Debes ingresar un nombre y un precio válido.");
+        return;
+    }
+
+    const productos = ProductoService.obtenerProductos();
+    const index = productos.findIndex(p => p.id === id);
+    if (index === -1) return;
+
+    // se cambia el producto en la lista
+    productos[index] = { id, nombre, precio };
+
+    // se guardan los datos actualizados
+    ProductoService.guardarProductos(productos);
+
+    // se muestra de nuevo la lista
+    mostrarProductos();
+
+    // se limpian los campos del formulario
+    limpiarCamposProducto();
+
+    // se cambia otra vez el botón a su función original
+    const btnAgregar = document.getElementById("btn_producto");
+    btnAgregar.textContent = "Agregar Producto";
+    btnAgregar.onclick = agregarProducto;
+}
+
+// se borra un producto cuando el usuario lo confirma
+function eliminarProducto(id) {
+    const confirmacion = confirm("¿Seguro que quieres eliminar este producto?");
+    if (!confirmacion) return;
+
+    let productos = ProductoService.obtenerProductos();
+    productos = productos.filter(p => p.id !== id);
+    ProductoService.guardarProductos(productos);
+
+    // se vuelve a mostrar la lista sin ese producto
+    mostrarProductos();
+}
+
+// se muestra la lista de productos cuando la página carga
+document.addEventListener("DOMContentLoaded", mostrarProductos);
